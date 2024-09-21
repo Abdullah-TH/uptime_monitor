@@ -56,7 +56,7 @@
               <% else %>
                 <ul class="mb-6">
                   <% @domains.each do |domain| %>
-                    <li><%= domain.name %></li>
+                    <li class="my-2"><%= link_to domain.name, domain_path(domain), class: "p-2 hover:text-sky-500"%></li>
                   <% end %>
                 </ul>
               <% end %>
