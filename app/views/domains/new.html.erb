@@ -1,9 +1,17 @@
 <div>
   <%= form_with model: @domain do |f| %>
+    <% invalid = @domain.errors.include?(:name) %>
     <fieldset>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.label :name, class: "block" %>
+      <div class="flex gap-2">
+        <%= f.text_field :name, placeholder: "google.com", class: "#{"border-red-500" if invalid}" %>
+        <%= f.submit "Create", class: "bg-sky-500 text-white p-3 rounded" %>
+      </div>
     </fieldset>
-    <%= f.submit %>
+    <div>
+      <% @domain.errors.full_messages_for(:name).each do |error_message| %>
+        <p class="text-red-500"><%= error_message %></p>
+      <% end %>
+    </div>
   <% end %>
 </div>
