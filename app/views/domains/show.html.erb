@@ -1,4 +1,28 @@
-<div>
-  <h1 class="font-bold text-4xl">Domains#show</h1>
-  <p>Find me in app/views/domains/show.html.erb</p>
-</div>
+<h1 class="font-bold text-4xl">Uptime for <%= @domain.name %></h1>
+<table class="mt-5 min-w-full table-auto border-collapse">
+  <thead>
+    <tr class="bg-gray-200">
+      <th class="px-4 py-2 text-left text-gray-600">Domain</th>
+      <th class="px-4 py-2 text-left text-gray-600">Sent at</th>
+      <th class="px-4 py-2 text-left text-gray-600">Response time (ms)</th>
+      <th class="px-4 py-2 text-left text-gray-600">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="4" class="border-b">
+        <%= button_to "Ping", domain_pings_path(@domain), class: "bg-sky-500 text-white p-2 m-2 rounded" %>
+      </td>
+    </tr>
+    <% if @domain.pings.present? %>
+      <% @domain.pings.each do |ping| %>
+        <tr class="border-b <%= ping.nil? ? "bg-red-300" : "bg-green-300" %> %>">
+          <td class="p-2"><%= @domain.name %></td>
+          <td class="p-2"><%= ping.created_at unless ping.nil? %></td>
+          <td class="p-2"><%= ping.response_time %></td>
+          <td class="p-2"><%= ping.nil? ? "" : "true" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
