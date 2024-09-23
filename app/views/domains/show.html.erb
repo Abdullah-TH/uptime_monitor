@@ -24,7 +24,7 @@
                         params: { domain: { monitoring: true } },
                         class: "bg-sky-500 text-white p-2 m-2 rounded" %>
         <% else %>
-          <%= button_to "Monitor",
+          <%= button_to "Stop Minoring",
                         domain_path(@domain),
                         method: :patch,
                         params: { domain: { monitoring: false } },

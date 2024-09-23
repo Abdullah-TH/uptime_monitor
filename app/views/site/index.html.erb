@@ -12,9 +12,7 @@
   <% if @domains.present? %>
     <% @domains.each do |domain| %>
       <% ping = domain.pings.last %>
-      <% unless ping.nil?%>
-        <%= render partial: "pings/ping", locals: { domain: domain, ping: ping } %>
-      <% end %>
+      <%= render partial: "pings/ping", locals: { domain: domain, ping: ping } %>
     <% end %>
   <% end %>
   </tbody>
