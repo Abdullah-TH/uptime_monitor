@@ -1,5 +1,10 @@
 <%= turbo_stream_from dom_id(@domain) %>
 <h1 class="font-bold text-4xl">Uptime for <%= @domain.name %></h1>
+<div>
+  <%= turbo_frame_tag "monitoring-button" do %>
+    <%= render "buttons" %>
+  <% end %>
+</div>
 <table class="mt-5 min-w-full table-auto border-collapse">
   <thead>
     <tr class="bg-gray-200">
@@ -10,18 +15,6 @@
     </tr>
   </thead>
   <tbody id="pings">
-    <tr>
-      <td colspan="2" class="border-b">
-        <% unless @domain.monitoring %>
-          <%= button_to "Ping", domain_pings_path(@domain), data: { turbo: true }, class: "bg-sky-500 text-white p-2 m-2 rounded" %>
-        <% end %>
-      </td>
-      <td colspan="2" align="right">
-        <%= turbo_frame_tag "monitoring-button" do %>
-          <%= render "monitor_button" %>
-        <% end %>
-      </td>
-    </tr>
     <% if @domain.pings.present? %>
       <% @domain.pings.each do |ping| %>
         <%= render partial: "pings/ping", locals: { domain: @domain, ping: ping } %>

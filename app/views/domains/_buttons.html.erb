@@ -1,0 +1,22 @@
+<div class="flex w-full">
+  <div class="border-b">
+    <% unless @domain.monitoring %>
+      <%= button_to "Ping", domain_pings_path(@domain), data: { turbo: true }, class: "w-28 bg-sky-500 text-white p-2 m-2 rounded" %>
+    <% end %>
+  </div>
+  <div  align="right">
+    <% if !@domain.monitoring %>
+      <%= button_to "Monitor",
+                    domain_path(@domain),
+                    method: :patch,
+                    params: { domain: { monitoring: true } },
+                    class: "w-28 bg-sky-500 text-white p-2 m-2 rounded" %>
+    <% else %>
+      <%= button_to "Stop Monitoring",
+                    domain_path(@domain),
+                    method: :patch,
+                    params: { domain: { monitoring: false } },
+                    class: "w-48 bg-sky-500 text-white p-2 m-2 rounded" %>
+    <% end %>
+  </div>
+</div>
