@@ -1,4 +1,4 @@
-<tr class="border-b <%= ping.nil? ? "bg-red-300" : "bg-green-300" %> %>">
+<tr class="border-b <%= ping.nil? ? "bg-red-300" : "bg-green-300" %>">
   <td class="p-2"><%= domain.name %></td>
   <td class="p-2"><%= ping.created_at unless ping.nil? %></td>
   <td class="p-2"><%= ping.response_time %></td>
