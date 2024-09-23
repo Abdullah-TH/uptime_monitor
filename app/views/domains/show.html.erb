@@ -8,20 +8,15 @@
       <th class="px-4 py-2 text-left text-gray-600">Status</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="pings">
     <tr>
       <td colspan="4" class="border-b">
-        <%= button_to "Ping", domain_pings_path(@domain), class: "bg-sky-500 text-white p-2 m-2 rounded" %>
+        <%= button_to "Ping", domain_pings_path(@domain), data: { turbo: true }, class: "bg-sky-500 text-white p-2 m-2 rounded" %>
       </td>
     </tr>
     <% if @domain.pings.present? %>
       <% @domain.pings.each do |ping| %>
-        <tr class="border-b <%= ping.nil? ? "bg-red-300" : "bg-green-300" %> %>">
-          <td class="p-2"><%= @domain.name %></td>
-          <td class="p-2"><%= ping.created_at unless ping.nil? %></td>
-          <td class="p-2"><%= ping.response_time %></td>
-          <td class="p-2"><%= ping.nil? ? "" : "true" %></td>
-        </tr>
+        <%= render partial: "pings/ping", locals: { domain: @domain, ping: ping } %>
       <% end %>
     <% end %>
   </tbody>

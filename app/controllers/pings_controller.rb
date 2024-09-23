@@ -7,7 +7,7 @@ class PingsController < ApplicationController
     start_time = Time.now
     response = http.request(Net::HTTP::Get.new("/"))
     response_time = (Time.now - start_time) * 1000
-    @domain.pings.create(response_time: response_time, alive: true)
+    @ping = @domain.pings.create(response_time: response_time, alive: true)
   rescue StandardError => e
     @domain.pings.create(alive: false)
   end
