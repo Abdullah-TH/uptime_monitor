@@ -17,18 +17,8 @@
         <% end %>
       </td>
       <td colspan="2" align="right">
-        <% if !@domain.monitoring %>
-          <%= button_to "Monitor",
-                        domain_path(@domain),
-                        method: :patch,
-                        params: { domain: { monitoring: true } },
-                        class: "bg-sky-500 text-white p-2 m-2 rounded" %>
-        <% else %>
-          <%= button_to "Stop Minoring",
-                        domain_path(@domain),
-                        method: :patch,
-                        params: { domain: { monitoring: false } },
-                        class: "bg-sky-500 text-white p-2 m-2 rounded" %>
+        <%= turbo_frame_tag "monitoring-button" do %>
+          <%= render "monitor_button" %>
         <% end %>
       </td>
     </tr>

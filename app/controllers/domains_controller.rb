@@ -24,7 +24,6 @@ class DomainsController < ApplicationController
     else
       flash[:notice] = "Monitoring failed!"
     end
-    head :no_content
   end
 
   private
