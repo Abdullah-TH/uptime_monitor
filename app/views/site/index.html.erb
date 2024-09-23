@@ -1,4 +1,21 @@
-<div>
-  <h1 class="font-bold text-4xl">Site#index</h1>
-  <p>Find me in app/views/site/index.html.erb</p>
-</div>
+<h1 class="font-bold text-4xl">Dashboard</h1>
+<table class="mt-5 min-w-full table-auto border-collapse">
+  <thead>
+  <tr class="bg-gray-200">
+    <th class="px-4 py-2 text-left text-gray-600">Domain</th>
+    <th class="px-4 py-2 text-left text-gray-600">Most recent ping</th>
+    <th class="px-4 py-2 text-left text-gray-600">Response time (ms)</th>
+    <th class="px-4 py-2 text-left text-gray-600">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @domains.present? %>
+    <% @domains.each do |domain| %>
+      <% ping = domain.pings.last %>
+      <% unless ping.nil?%>
+        <%= render partial: "pings/ping", locals: { domain: domain, ping: ping } %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
